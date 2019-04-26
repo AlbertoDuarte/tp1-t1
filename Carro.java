@@ -10,14 +10,40 @@ package trabalhow;
  * @author root
  */
 public class Carro {
-    String placa;
-    String cor;
-    int ano;
-    int RENAVAM;
-    int quilometragem;
+    private static int countId = 1;
+    private int id;
     
-    static int n_portas;
-    static String combustivel;
+    private Modelo modelo;
     
-    Modelo modelo;
+    private String placa;
+    private String cor;
+    private int ano;
+    private int RENAVAM;
+    private int quilometragem;
+    
+    Carro(Modelo modelo, String placa, String cor, int ano, int RENAVAM, int quilometragem) {
+        this.id = Carro.countId;
+        Carro.countId++;
+        
+        this.placa = placa.toLowerCase();
+        this.cor = cor.toLowerCase();
+        this.ano = ano;
+        this.RENAVAM = RENAVAM;
+        this.quilometragem = quilometragem;
+
+        this.modelo = modelo;
+        modelo.adicionarCarro((this));
+    }
+    
+    public int getId() {
+        return this.id;
+    }
+    
+    public Modelo getModelo() {
+        return this.modelo;
+    }
+    
+    public void modificarModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
 }
