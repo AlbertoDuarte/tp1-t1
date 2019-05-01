@@ -12,15 +12,14 @@ import java.util.Iterator;
  *
  * @author root
  */
-public class Marca {
+public class Marca extends ObjetoId {
     private static int countId;
-    private int id;
     private ArrayList<Modelo> modelos;
     
     private String nome;
 
     Marca(String nome) {
-        this.id = Marca.countId;
+        super(Marca.countId);
         Marca.countId++;
         this.modelos = new ArrayList<>();
         
@@ -52,4 +51,13 @@ public class Marca {
             System.out.println("Modelo nao encontrado");
         }
     }
+    
+    public ArrayList<Modelo> getModelos() {
+        return this.modelos;
+    }
+    
+    @Override
+    public String toString() { 
+      return "Marca id " + this.getId() + ", Nome: " + this.getNome() + "";
+    } 
 }

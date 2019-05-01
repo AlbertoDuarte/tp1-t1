@@ -11,49 +11,45 @@ import java.util.ArrayList;
  *
  * @author root
  */
-public class Modelo extends ObjetoId {
-    static int countId = 1;
+public class Categoria {
+    private String letra;
+    private double valor_diaria;
+    
     private ArrayList<Carro> carros;
-    
-    private Marca marca;
-    private String nome;
-    private String combustivel;
-    private int n_portas;
-    
-    Modelo(Marca marca, String nome, String combustivel, int n_portas) {
-        super(Modelo.countId);
-        Modelo.countId++;
-        this.carros = new ArrayList<>();
-        
-        this.nome = nome.toLowerCase();
-        this.combustivel = combustivel.toLowerCase();
-        this.n_portas = n_portas;        
-        
-        this.marca = marca;
-        marca.adicionarModelo((this));
-    }
-    
-    public String getNome() {
-        return this.nome;
-    }
-    
-    public Marca getMarca() {
-       return this.marca; 
-    }
 
-    public void modificarMarca(Marca marca) {
-        this.marca = marca;
+    
+    Categoria(String letra, double valor_diaria) {
+        this.letra = letra;
+        this.valor_diaria = valor_diaria;
+        
+        this.carros = new ArrayList<>();       
+
+    }
+    
+    public String getLetra() {
+        return this.letra;
+    }
+    
+    public double getValorDiaria() {
+        return this.valor_diaria;
+    }
+    
+    public void setLetra(String letra) {
+        this.letra = letra;
+    }
+    
+    public void setValorDiaria(double valor_diaria) {
+        this.valor_diaria = valor_diaria;
     }
     
     public void adicionarCarro(Carro carro) {
         for (Carro i : this.carros) {
             if(carro.getId() == i.getId()) {
-                System.out.println("Carro ja esta no modelo!");
+                System.out.println("Carro ja esta na categoria!");
                 return;
             }
         }
         this.carros.add(carro);
-        carro.modificarModelo(this);
     }
     
     public void removerCarro(Carro carro) {
@@ -73,6 +69,6 @@ public class Modelo extends ObjetoId {
     
     @Override
     public String toString() { 
-      return "Modelo id " + this.getId() + ", Nome: " + this.getNome() + ", Marca: " + this.getMarca().getNome() + "";
+      return "Categoria " + this.letra;
     } 
 }
