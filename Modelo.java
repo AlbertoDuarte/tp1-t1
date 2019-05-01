@@ -11,9 +11,8 @@ import java.util.ArrayList;
  *
  * @author root
  */
-public class Modelo {
-    static int countId = 1;
-    private int id;
+public class Modelo extends ObjetoId {
+    private static int countId = 1;
     private ArrayList<Carro> carros;
     
     private Marca marca;
@@ -22,7 +21,7 @@ public class Modelo {
     private int n_portas;
     
     Modelo(Marca marca, String nome, String combustivel, int n_portas) {
-        this.id = Modelo.countId;
+        super(Modelo.countId);
         Modelo.countId++;
         this.carros = new ArrayList<>();
         
@@ -36,10 +35,6 @@ public class Modelo {
     
     public String getNome() {
         return this.nome;
-    }
-    
-    public int getId() {
-        return this.id;
     }
     
     public Marca getMarca() {
@@ -65,10 +60,19 @@ public class Modelo {
         boolean s;
         s = this.carros.remove(carro);
         if(s) {
-            System.out.println("Modelo removido com sucesso");
+            System.out.println("Carro removido com sucesso");
         }
         else {
-            System.out.println("Modelo nao encontrado");
+            System.out.println("Carro nao encontrado");
         }
+    }
+    
+    public ArrayList<Carro> getCarros() {
+        return this.carros;
+    }
+
+    @Override
+    public String toString() { 
+      return "Modelo id " + this.getId() + ", Nome: " + this.getNome() + ", Marca: " + this.getMarca().getNome() + "";
     }
 }

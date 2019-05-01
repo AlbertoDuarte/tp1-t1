@@ -9,10 +9,10 @@ package trabalhow;
  *
  * @author root
  */
-public class Carro {
+public class Carro extends ObjetoId {
     private static int countId = 1;
-    private int id;
     
+    private Categoria categoria;
     private Modelo modelo;
     
     private String placa;
@@ -22,7 +22,7 @@ public class Carro {
     private int quilometragem;
     
     Carro(Modelo modelo, String placa, String cor, int ano, int RENAVAM, int quilometragem) {
-        this.id = Carro.countId;
+        super(Carro.countId);
         Carro.countId++;
         
         this.placa = placa.toLowerCase();
@@ -35,15 +35,24 @@ public class Carro {
         modelo.adicionarCarro((this));
     }
     
-    public int getId() {
-        return this.id;
+    public Categoria getCategoria() {
+        return this.categoria;
     }
     
     public Modelo getModelo() {
         return this.modelo;
     }
     
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+    
     public void modificarModelo(Modelo modelo) {
         this.modelo = modelo;
     }
+    
+    @Override
+    public String toString() { 
+      return "Carro nº " + this.getId()+ ", Placa: " + this.placa + ", Modelo " + this.modelo.getNome() + ", Marca: " + this.modelo.getMarca().getNome() + "";
+    } 
 }

@@ -31,9 +31,10 @@ public class Trabalhow {
         System.out.println(carro1.getModelo().getMarca().getNome());
         System.out.println(carro2.getModelo().getMarca().getNome());
         
-        
-        
-
+        System.out.println(carro1.toString());
+        System.out.println(carro2.toString());
+        System.out.println(modelo1.toString());
+        System.out.println(marca1.toString());
     }
     
 }
