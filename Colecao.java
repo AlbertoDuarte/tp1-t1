@@ -10,7 +10,7 @@ public class Colecao{
 	int tamanho_da_pagina;
 	
 	// Métodos
-	public Colecao(int tamanho_da_pagina){
+	public colecao(int tamanho_da_pagina){
 		this.tamanho_da_pagina=tamanho_da_pagina;
 		this.vetor = new ArrayList<Colecionavel>();
 	}
@@ -84,22 +84,16 @@ public class Colecao{
 			i.mostra_resumo();
 		}
 	}
+	@SuppressWarnings("resource")
 	public Colecionavel navega(boolean select) {
-		Scanner input = new Scanner(System.in);
-		
 		int primeiro_da_pagina;
+		Scanner input = new Scanner(System.in);
 		String escolha;
-		
-		do
-		{			
+		do {						
 			// VOU COLOCAR LINHAS MSM :V
 			for(int k=0;k<40;k++)
 				System.out.printf("\n");
 			
-			// Mostra seleção
-			System.out.println("#######################");
-			System.out.printf( "|ID: %d|\n",this.vetor.get(selecao).get_id());
-			this.vetor.get(selecao).mostra_completo();			
 			System.out.println("#######################");
 			System.out.println("Use 'w' e 's' para escolher.");
 			System.out.println("Use 'a' e 'd' para mudar de pagina.");
@@ -132,13 +126,36 @@ public class Colecao{
 			System.out.printf("\n");
 			System.out.println("Pagina " + primeiro_da_pagina/tamanho_da_pagina + " de " + vetor.size()/tamanho_da_pagina);
 			
-			escolha = new String(input.nextLine()); // NAO SEI COLETAR UM CHAR CONTANDO  COM O \n
+			escolha = new String(input.nextLine());
 			System.out.println(escolha);
 			
-			if (select && escolha.length()==0)
-			{
-				input.close();
-				return this.vetor.get(selecao);
+			if (escolha.length()==0)
+			{				
+				do {
+					// VOU COLOCAR LINHAS MSM :V
+					for(int k=0;k<40;k++)
+						System.out.printf("\n");
+					
+					System.out.println("#######################");
+					if(select) {
+						System.out.println("Use 'ENTER' para confirmar");
+						System.out.println("Use 'r' para cancelar.");
+					}
+					else
+						System.out.println("Use 'r' para voltar.");
+					System.out.println("#######################");
+					System.out.printf( "|ID: %015d|\n",this.vetor.get(selecao).get_id());
+					this.vetor.get(selecao).mostra_completo();
+					
+					escolha = new String(input.nextLine());
+					if(select && escolha.length()==0)
+					{
+						input.close();
+						return this.vetor.get(selecao);
+					}
+				}
+				while(escolha.length()==0 || escolha.charAt(0)!='r');
+				escolha = new String("k");
 			}
 			else
 			{
@@ -156,8 +173,8 @@ public class Colecao{
 			}
 		}
 		while(escolha.charAt(0) != 'r');
-		// Remover
-		input.close(); 
+		
+		// Cancelar
 		return null;
 	}
 	public void reset(){this.selecao=0;}
