@@ -1,4 +1,4 @@
-package locacoes;
+package Fluxos;
 
 import java.util.Date;
 import cliente.cliente;
@@ -21,8 +21,13 @@ public class locacao_s_prazo extends locacao{
 		this.desconto=desconto;
 	}
 	@Override
-	public void mostra_dados() {
-		super.mostra_dados();
+	public void mostra_resumo() {
+		super.mostra_resumo();
+		System.out.printf("s/ Prazo; ");
+	}
+	@Override
+	public void mostra_completo() {
+		super.mostra_completo();
 		System.out.println("Desconto:" + desconto);
 	}
 	public double calcula_custo(float valor_diaria) {
@@ -31,4 +36,8 @@ public class locacao_s_prazo extends locacao{
 		// Obter quantidade de dias no intervalo para multiplicar pela diária, e aplicar o desconto.
 		return valor_diaria*((data.getTime()-super.tempo.getTime())/dia)*(1-desconto);
 	}
+	@Override
+	public void gera_id() { super.gera_id();}
+	@Override
+	public int get_id() {return id;}
 }

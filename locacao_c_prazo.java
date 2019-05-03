@@ -1,4 +1,4 @@
-package locacoes;
+package Fluxos;
 import undefined_test.agencia;
 import undefined_test.automovel;
 import java.util.Date;
@@ -21,10 +21,15 @@ public class locacao_c_prazo extends locacao{
 		this.violacao=false;
 	}
 	@Override
-	public void mostra_dados() {
+	public void mostra_completo() {
 		// Mostra super + o que resta
-		super.mostra_dados();
-		System.out.println("Prazo: " + this.prazo + " dias " + "Prazo violado: " + this.violacao);
+		super.mostra_completo();
+		System.out.println("Prazo: " + this.prazo + " dias; " + "Prazo violado: " + this.violacao);
+	}
+	public void mostra_resumo() {
+		// Mostra super + o que resta
+		super.mostra_resumo();
+		System.out.printf("c/ Prazo; ");
 	}
 	@Override
 	public double calcula_custo(float valor_diaria) {
@@ -43,4 +48,8 @@ public class locacao_c_prazo extends locacao{
 			return prazo*valor_diaria; // Caso o cliente tenha entregue antes, vai pagar tudo do mesmo modo >:)
 	    //}
 	}
+	@Override
+	public void gera_id() {super.gera_id();}
+	@Override
+	public int get_id() {return id;}
 }
