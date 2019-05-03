@@ -16,19 +16,20 @@ public class colecao{
 	}
 	public void adiciona(colecionavel objeto) {
 		// Inserir ordenado
-		int r = this.vetor.size() - 1;
-		int l=0,i=0;
+		int r = this.vetor.size(); // Inclui a posição vaga
+		int l=0,i=r/2;
 		
 		// Busca binária, até l = r = i
 		while(l<r)
 		{
-			i=(l+r)/2;
-			
 			if(objeto.get_id() < this.vetor.get(i).get_id())
 				r=i;	// Descartar após índice i
 			else // c.c
 				l=i+1;	// Descartar antes e no índice i
+
+			i=(l+r)/2;
 		}
+		
 		this.vetor.add(i,objeto);
 	}
 	public colecionavel procura(int id) {
@@ -83,7 +84,7 @@ public class colecao{
 		Scanner input = new Scanner(System.in);
 		
 		int primeiro_da_pagina;
-		char escolha;
+		String escolha;
 		
 		do
 		{			
@@ -98,7 +99,7 @@ public class colecao{
 			System.out.println("#######################");
 			System.out.println("Use 'w' e 's' para escolher.");
 			System.out.println("Use 'a' e 'd' para mudar de pagina.");
-			System.out.println("Use 'c' para selecionar");
+			System.out.println("Use 'ENTER' para selecionar");
 			System.out.println("Use 'r' para cancelar.");
 			System.out.println("#######################");
 			// Mostra lista
@@ -122,12 +123,15 @@ public class colecao{
 			System.out.printf("\n");
 			System.out.println("Pagina " + primeiro_da_pagina/tamanho_da_pagina + " de " + vetor.size()/tamanho_da_pagina);
 			
-			escolha = input.nextLine().charAt(0); // NAO SEI COLETAR UM CHAR CONTANDO  COM O \n
+			escolha = new String(input.nextLine()); // NAO SEI COLETAR UM CHAR CONTANDO  COM O \n
 			System.out.println(escolha);
 			
-			switch (escolha){
-			 	// Cancelar
-				case 'r': input.close(); return null;
+			if (escolha.length()==0)
+			{
+				input.close();
+				return this.vetor.get(selecao);
+			}
+			switch (escolha.charAt(0)) {
 				// Escolher
 				case 'w': if(selecao > 0) selecao--; break;
 				case 's': if(selecao + 1 < vetor.size()) selecao++; break;
@@ -139,11 +143,10 @@ public class colecao{
 				}
 			}
 		}
-		while(escolha != '\n');
-		
-		input.close();
-		
-		return this.vetor.get(selecao);
+		while(escolha.charAt(0) != 'r');
+		// Remover
+		input.close(); 
+		return null;
 	}
 	public void reset(){this.selecao=0;}
 }
