@@ -9,26 +9,26 @@ public class Colecao{
 	int selecao;
 	int tamanho_da_pagina;
 	
-	// MÈtodos
-	public colecao(int tamanho_da_pagina){
+	// M√©todos
+	public Colecao(int tamanho_da_pagina){
 		this.tamanho_da_pagina=tamanho_da_pagina;
 		this.vetor = new ArrayList<Colecionavel>();
 	}
 	public boolean adiciona(Colecionavel objeto) {
 		// Inserir ordenado
-		int r = this.vetor.size(); // Inclui a posiÁ„o vaga
+		int r = this.vetor.size(); // Inclui a posi√ß√£o vaga
 		int l=0,i=r/2;
 		
-		// Busca bin·ria, atÈ l = r = i
+		// Busca bin√°ria, at√© l = r = i
 		while(l<r)
 		{
 			if(objeto.get_id() == this.vetor.get(i).get_id())
 				return false;
 			
 			if(objeto.get_id() < this.vetor.get(i).get_id())
-				r=i;	// Descartar apÛs Ìndice i
+				r=i;	// Descartar ap√≥s √≠ndice i
 			else // c.c
-				l=i+1;	// Descartar antes e no Ìndice i
+				l=i+1;	// Descartar antes e no √≠ndice i
 
 			i=(l+r)/2;
 		}
@@ -40,7 +40,7 @@ public class Colecao{
 		int r = this.vetor.size() - 1;
 		int l=0,i;
 		Colecionavel atual;
-		// Busca bin·ria, atÈ um intervalo [l,r] inexistente
+		// Busca bin√°ria, at√© um intervalo [l,r] inexistente
 		while(l<=r)
 		{
 			i=(l+r)/2;
@@ -50,18 +50,18 @@ public class Colecao{
 				return atual;
 			else
 			if(id < atual.get_id())
-				r=i-1;	// Descartar apÛs e no Ìndice i
+				r=i-1;	// Descartar ap√≥s e no √≠ndice i
 			else // c.c
-				l=i+1;	// Descartar antes e no Ìndice i
+				l=i+1;	// Descartar antes e no √≠ndice i
 		}
-		// N„o existe
+		// N√£o existe
 		return null;
 	}
 	public Colecionavel remove(int id) {
 		int r = this.vetor.size() - 1;
 		int l=0,i;
 		Colecionavel atual;
-		// Busca bin·ria, atÈ um intervalo [l,r] inexistente
+		// Busca bin√°ria, at√© um intervalo [l,r] inexistente
 		while(l<=r)
 		{
 			i=(l+r)/2;
@@ -71,11 +71,11 @@ public class Colecao{
 				return this.vetor.remove(i);
 			else
 			if(id < atual.get_id())
-				r=i-1;	// Descartar apÛs e no Ìndice i
+				r=i-1;	// Descartar ap√≥s e no √≠ndice i
 			else // c.c
-				l=i+1;	// Descartar antes e no Ìndice i
+				l=i+1;	// Descartar antes e no √≠ndice i
 		}
-		// N„o existe
+		// N√£o existe
 		return null;
 	}
 	public void mostra() {
@@ -111,7 +111,7 @@ public class Colecao{
 			{
 				if(0<=i && i<vetor.size())
 				{	
-					// SeleÁ„o
+					// Sele√ß√£o
 					if(i == selecao)
 						System.out.printf(">> ");
 					else
@@ -163,7 +163,7 @@ public class Colecao{
 					// Escolher
 					case 'w': if(selecao > 0) selecao--; break;
 					case 's': if(selecao + 1 < vetor.size()) selecao++; break;
-					// Mudar p·gina
+					// Mudar p√°gina
 					case 'a': if(primeiro_da_pagina >= tamanho_da_pagina)  selecao= primeiro_da_pagina - tamanho_da_pagina; break;
 					case 'd': {
 						if(primeiro_da_pagina + tamanho_da_pagina < vetor.size()) 
