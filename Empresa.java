@@ -2,9 +2,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * Esta classe depende de um getId nos clientes e marcas, e de um getletra nas categorias.
- */
 public class Empresa {
     private String nome;
     private ArrayList<Agencia> agencias;
