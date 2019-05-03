@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package trabalhow;
-
-import java.util.ArrayList;
-import java.util.Iterator;
+import Colecoes.Colecao;
 
 /**
  *
@@ -14,14 +12,13 @@ import java.util.Iterator;
  */
 public class Marca extends ObjetoId {
     private static int countId = 1;
-    private ArrayList<Modelo> modelos;
+    private Colecao modelos;
     
     private String nome;
 
     Marca(String nome) {
         super(Marca.countId);
         Marca.countId++;
-        this.modelos = new ArrayList<>();
         
         this.nome = nome.toLowerCase();
     }
@@ -31,33 +28,32 @@ public class Marca extends ObjetoId {
     }
 
     public void adicionarModelo(Modelo modelo) {
-        for (Modelo i : this.modelos) {
-            if(modelo.getId() == i.getId()) {
-                System.out.println("Modelo ja esta na marca!");
-                return;
-            }
+        if(!modelos.adiciona(modelo)) {
+            System.out.println("Modelo ja esta na marca!");
+            return;
         }
-        this.modelos.add(modelo);
         modelo.modificarMarca(this);
     }
     
     public void removerModelo(Modelo modelo) {
-        boolean s;
-        s = this.modelos.remove(modelo);
-        if(s) {
+        if(modelos.remove(modelo.get_id())!=null)
             System.out.println("Modelo removido com sucesso");
-        }
-        else {
+        else
             System.out.println("Modelo nao encontrado");
-        }
     }
     
-    public ArrayList<Modelo> getModelos() {
-        return this.modelos;
+    public Modelo acessa_Modelos() {
+        return (Modelo) modelos.navega(true);
     }
 
     @Override
     public String toString() { 
-      return "Marca id " + this.getId() + ", Nome: " + this.getNome() + "";
-    } 
+    	return "Marca id " + this.get_id() + ", Nome: " + this.getNome() + "";
+    }
+
+	@Override
+	public void mostra_resumo() {System.out.printf("Nome: %s", getNome());}
+
+	@Override
+	public void mostra_completo() { mostra_resumo(); System.out.println();} 
 }

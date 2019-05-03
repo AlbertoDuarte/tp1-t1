@@ -1,99 +1,63 @@
 ﻿package trabalhow;
-import java.util.ArrayList;
-import java.util.Iterator;
+
+import Colecoes.Colecao;
+import cliente.Cliente;
+import trabalhow.Agencia;
+import trabalhow.Categoria;
 
 public class Empresa {
     private String nome;
-    private ArrayList<Agencia> agencias;
-    private ArrayList<cliente> clientes;
-    private ArrayList<Categoria> categorias;
-    private ArrayList<Marca> marcas;
+    private Colecao agencias;
+    private Colecao clientes;
+    private Colecao categorias;
+    private Colecao marcas;
     
     Empresa(String nome){
         this.nome = nome;
-        this.agencias = new ArrayList<>();
-        this.clientes = new ArrayList<>();
-        this.categorias = new ArrayList<>();
-        this.marcas = new ArrayList<>();
     }
     
     public void mostra_atributos(){
         System.out.println("Nome da Empresa: " + nome);
-        for(Agencia i : this.agencias){
-            System.out.println("ID: " + i.id + " | CEP: " + i.CEP);
-        }
+        System.out.println("AGENCIAS:");
+        agencias.mostra();
     }
-    public void adiciona_agencia(Agencia agencia){
-        for(Agencia i : this.agencias){
-            if(i.getId() == agencia.getId()){
+    // AGENCIAS
+    public void adiciona(Agencia agencia){
+        if(!agencias.adiciona(agencia))
                 System.out.println("Esta agência já está adicionada.");
-                return;
-            }
-        }
-        this.agencias.add(agencia);
     }
     
-    public Agencia acessa_agencia(int id){
-        for(Agencia i : this.agencias){
-            if(i.getId() == id){
-                return i;
-            }
-        }
-        System.out.println("Agência não encontrada.");
+    public Agencia acessa_agencia(){
+    	return (Agencia) agencias.navega(true);
+    }
+    // CLIENTES
+    public void adiciona(Cliente cliente_novo){
+        if(!clientes.adiciona(cliente_novo))
+        	System.out.println("Este cliente já está adicionado.");
     }
     
-    public void adiciona_cliente(cliente cliente_novo){
-        for(cliente i : this.clientes){
-            if(cliente_novo.get_id() == i.get_id()){
-                System.out.println("Este cliente já está adicionado.");
-                return;
-            }
-        }
-        this.clientes.add(cliente_novo);
+    public Cliente acessa_clientes(){
+        return (Cliente) clientes.navega(true);
     }
     
-    public cliente acessa_cliente(int id){
-        for(cliente i : this.clientes){
-            if(id == i.get_id()){
-                return i;
-            }
-        }
-        System.out.println("Cliente não encontrado.");
-    }
-    
-    public void adiciona_categoria(Categoria categoria){
-        for(Categoria i : this.categorias){
-            if(categoria.getLetra() == i.getLetra()){
+    // CATEGORIAS
+    public void adiciona(Categoria categoria){
+        if(!categorias.adiciona(categoria))
                 System.out.println("Esta categoria já está adicionada.");
-                return;
-            }
-        }
-        this.categorias.add(categoria);
     }
-    public Categoria acessa_categoria(char letra){
-        for(Categoria i : this.categorias){
-            if(i.getLetra() == letra){
-                return i;
-        }
-        System.out.println("Categoria não encontrada.");
+    public Categoria acessa_categorias(){
+    	return (Categoria) categorias.navega(true);
     }
     
-    public void adiciona_marca(Marca marca){
-        for(Marca i : this.marcas){
-            if(i.getId() == marca.getId()){
+    // MARCAS
+    public void adiciona(Marca marca){
+        if(!marcas.adiciona(marca))
                 System.out.println("Esta marca já está adicionada.");
-            }
-        }
-        this.marcas.add(marca);
     }
-    public void remove_marca(Marca marca){
-        boolean s;
-        s = this.marcas.remove(marca);
-        if(s){
+    public void remove(Marca marca){
+        if(marcas.remove(marca.get_id())!=null)
             System.out.println("Marca removida com sucesso.");
-        }
-        else{
+        else
             System.out.println("Marca não encontrada.");
-        }
     }
 }

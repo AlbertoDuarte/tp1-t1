@@ -5,7 +5,7 @@
  */
 package trabalhow;
 
-import java.util.ArrayList;
+import Colecoes.Colecao;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Modelo extends ObjetoId {
     private static int countId = 1;
-    private ArrayList<Carro> carros;
+    private Colecao carros;
     
     private Marca marca;
     private String nome;
@@ -23,7 +23,6 @@ public class Modelo extends ObjetoId {
     Modelo(Marca marca, String nome, String combustivel, int n_portas) {
         super(Modelo.countId);
         Modelo.countId++;
-        this.carros = new ArrayList<>();
         
         this.nome = nome.toLowerCase();
         this.combustivel = combustivel.toLowerCase();
@@ -46,33 +45,34 @@ public class Modelo extends ObjetoId {
     }
     
     public void adicionarCarro(Carro carro) {
-        for (Carro i : this.carros) {
-            if(carro.getId() == i.getId()) {
-                System.out.println("Carro ja esta no modelo!");
-                return;
-            }
+        if(carros.adiciona(carro)) {
+            System.out.println("Carro ja esta no modelo!");
+            return;
         }
-        this.carros.add(carro);
         carro.modificarModelo(this);
     }
     
     public void removerCarro(Carro carro) {
-        boolean s;
-        s = this.carros.remove(carro);
-        if(s) {
+        if(carros.remove(carro.get_id())!=null)
             System.out.println("Carro removido com sucesso");
-        }
-        else {
+        else
             System.out.println("Carro nao encontrado");
-        }
     }
     
-    public ArrayList<Carro> getCarros() {
-        return this.carros;
-    }
+    public Carro acessa_carros() {return (Carro)carros.navega(true);}
 
     @Override
     public String toString() { 
-      return "Modelo id " + this.getId() + ", Nome: " + this.getNome() + ", Marca: " + this.getMarca().getNome() + "";
+      return "Modelo id " + this.get_id() + ", Nome: " + this.getNome() + ", Marca: " + this.getMarca().getNome() + "";
     }
+
+	@Override
+	public void mostra_completo() {
+		System.out.println(toString());
+		System.out.println("Combustivel: " + combustivel);
+		System.out.println("Portas: " + n_portas);
+	}
+
+	@Override
+	public void mostra_resumo() {System.out.printf("Nome: %s; Marca: %s", getNome(),getMarca());}
 }

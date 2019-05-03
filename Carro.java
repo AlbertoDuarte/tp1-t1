@@ -9,7 +9,7 @@ package trabalhow;
  *
  * @author root
  */
-public class Carro extends ObjetoId {
+public class Carro extends ObjetoId{
     private static int countId = 1;
     
     private Categoria categoria;
@@ -35,24 +35,32 @@ public class Carro extends ObjetoId {
         modelo.adicionarCarro((this));
     }
     
-    public Categoria getCategoria() {
-        return this.categoria;
-    }
+    public Categoria getCategoria() {return this.categoria;}
     
-    public Modelo getModelo() {
-        return this.modelo;
-    }
+    public Modelo getModelo() {return this.modelo;}
     
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+    public void setCategoria(Categoria categoria) {this.categoria = categoria;}
     
-    public void modificarModelo(Modelo modelo) {
-        this.modelo = modelo;
-    }
+    public void modificarModelo(Modelo modelo) {this.modelo = modelo;}
     
     @Override
     public String toString() { 
-      return "Carro nº " + this.getId()+ ", Placa: " + this.placa + ", Modelo " + this.modelo.getNome() + ", Marca: " + this.modelo.getMarca().getNome() + "";
-    } 
+      return "Carro nº " + this.get_id()+ ", Placa: " + this.placa + ", Modelo " + this.modelo.getNome() + ", Marca: " + this.modelo.getMarca().getNome() + "";
+    }
+
+	@Override
+	public void mostra_resumo() {System.out.printf("%s", this.toString());}
+	
+	@Override
+	public void mostra_completo() {
+		System.out.println("RENAVAM: " + this.RENAVAM);
+		System.out.println("Placa: " + this.placa);
+		System.out.println("Cor: " + this.cor);
+		System.out.println("Ano: " + this.ano);
+		System.out.println("Quilometragem: " + this.quilometragem);
+		System.out.printf("MARCA: "); 
+		System.out.printf("MODELO: "); modelo.mostra_resumo();
+		System.out.printf("CATEGORIA: "); categoria.mostra_resumo();
+	}
+ 
 }

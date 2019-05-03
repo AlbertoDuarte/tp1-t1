@@ -22,8 +22,8 @@ public class Trabalhow {
         carro1 = new Carro(modelo1, "aaa123", "azul", 2018, 123456789, 2000);
         carro2 = new Carro(modelo1, "bbb321", "branco", 2018, 987654321, 2500);
         
-        System.out.println(carro1.getId());
-        System.out.println(carro2.getId());
+        System.out.println(carro1.get_id());
+        System.out.println(carro2.get_id());
         
         System.out.println(carro1.getModelo().getNome());
         System.out.println(carro2.getModelo().getNome());

@@ -5,18 +5,19 @@
  */
 package trabalhow;
 
+import Colecoes.Colecionavel;
+
 /**
  *
  * @author root
  */
-public abstract class ObjetoId{
+public abstract class ObjetoId implements Colecionavel{
     private int id;
     
     ObjetoId(int id) {
         this.id = id;
     }
-    
-    public int getId() {
+    public int get_id() {
         return this.id;
     }
 }

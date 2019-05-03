@@ -5,25 +5,27 @@
  */
 package trabalhow;
 
-import java.util.ArrayList;
+import Colecoes.Colecao;
+import Colecoes.Colecionavel;
 
 /**
  *
  * @author root
  */
-public class Categoria {
+public class Categoria implements Colecionavel{
+	static int global_id=0;
+	int id;
+	
     private String letra;
     private double valor_diaria;
-
-    private ArrayList<Carro> carros;
+    private Colecao carros;
 
 
     Categoria(String letra, double valor_diaria) {
+    	id=global_id;
+    	global_id++;
         this.letra = letra;
         this.valor_diaria = valor_diaria;
-
-        this.carros = new ArrayList<>();       
-
     }
 
     public String getLetra() {
@@ -43,32 +45,32 @@ public class Categoria {
     }
 
     public void adicionarCarro(Carro carro) {
-        for (Carro i : this.carros) {
-            if(carro.getId() == i.getId()) {
+        if(!carros.adiciona(carro))
                 System.out.println("Carro ja esta na categoria!");
-                return;
-            }
-        }
-        this.carros.add(carro);
     }
 
     public void removerCarro(Carro carro) {
-        boolean s;
-        s = this.carros.remove(carro);
-        if(s) {
+        if(carros.remove(carro.get_id()) != null) 
             System.out.println("Carro removido com sucesso");
-        }
-        else {
+        else
             System.out.println("Carro nao encontrado");
-        }
     }
 
-    public ArrayList<Carro> getCarros() {
-        return this.carros;
-    }
+    public Carro acessa_carros() {return (Carro) carros.navega(true);}
 
     @Override
-    public String toString() { 
-      return "Categoria " + this.letra;
-    } 
+    public String toString() {return "Categoria " + this.letra;}
+
+	@Override
+	public int get_id() {return id;}
+
+	@Override
+	public void mostra_resumo() {System.out.printf("Letra: %s; Valor de diaria: %f", letra,valor_diaria);} 
+    
+	@Override
+    public void mostra_completo() {
+		System.out.printf("Letra: %s; Valor de diaria: %f", letra,valor_diaria);
+		System.out.println("CARROS:");
+		carros.mostra();
+    }
 }
