@@ -42,14 +42,14 @@ public class Empresa {
         System.out.println("Agência não encontrada.");
     }
     
-    public void adiciona_cliente(cliente cliente){
+    public void adiciona_cliente(cliente cliente_novo){
         for(cliente i : this.clientes){
-            if(cliente.get_id() == i.get_id()){
+            if(cliente_novo.get_id() == i.get_id()){
                 System.out.println("Este cliente já está adicionado.");
                 return;
             }
         }
-        this.clientes.add(cliente);
+        this.clientes.add(cliente_novo);
     }
     
     public cliente acessa_cliente(int id){
