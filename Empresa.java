@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class Empresa {
     private String nome;
     private ArrayList<Agencia> agencias;
-    private ArrayList<Cliente> clientes;
+    private ArrayList<cliente> clientes;
     private ArrayList<Categoria> categorias;
     private ArrayList<Marca> marcas;
     
@@ -42,9 +42,9 @@ public class Empresa {
         System.out.println("Agência não encontrada.");
     }
     
-    public void adiciona_cliente(Cliente cliente){
-        for(Cliente i : this.clientes){
-            if(cliente.getId() == i.getId()){
+    public void adiciona_cliente(cliente cliente){
+        for(cliente i : this.clientes){
+            if(cliente.get_id() == i.get_id()){
                 System.out.println("Este cliente já está adicionado.");
                 return;
             }
@@ -52,9 +52,9 @@ public class Empresa {
         this.clientes.add(cliente);
     }
     
-    public Cliente acessa_cliente(int id){
-        for(Cliente i : this.clientes){
-            if(id == i.getId()){
+    public cliente acessa_cliente(int id){
+        for(cliente i : this.clientes){
+            if(id == i.get_id()){
                 return i;
             }
         }
@@ -63,7 +63,7 @@ public class Empresa {
     
     public void adiciona_categoria(Categoria categoria){
         for(Categoria i : this.categorias){
-            if(categoria.getletra() == i.getletra()){
+            if(categoria.getLetra() == i.getLetra()){
                 System.out.println("Esta categoria já está adicionada.");
                 return;
             }
@@ -72,7 +72,7 @@ public class Empresa {
     }
     public Categoria acessa_categoria(char letra){
         for(Categoria i : this.categorias){
-            if(i.getletra() == letra){
+            if(i.getLetra() == letra){
                 return i;
         }
         System.out.println("Categoria não encontrada.");
