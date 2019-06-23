@@ -9,7 +9,7 @@ import colecoes.Colecionavel;
 
 /**
  *
- * @author root
+ * @author AlbertoDuarte
  */
 public abstract class ObjetoId implements Colecionavel{
     private int id;
@@ -17,7 +17,14 @@ public abstract class ObjetoId implements Colecionavel{
     ObjetoId(int id) {
         this.id = id;
     }
-    public int get_id() {
+
+    /**
+     * TODO:
+     * 
+     * @return
+     */
+    @Override
+    public int getId() {
         return this.id;
     }
 }

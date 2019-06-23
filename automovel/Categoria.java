@@ -10,11 +10,10 @@ import colecoes.Colecionavel;
 
 /**
  *
- * @author root
+ * @author AlbertoDuarte
  */
-public class Categoria implements Colecionavel{
-	static int global_id=0;
-	int id;
+public class Categoria extends ObjetoId{
+    private static int countId = 1;
 	
     private String letra;
     private double valor_diaria;
@@ -22,52 +21,101 @@ public class Categoria implements Colecionavel{
 
 
     Categoria(String letra, double valor_diaria) {
-    	id=global_id;
-    	global_id++;
-        this.letra = letra;
+        super(Categoria.countId);
+    	countId++;
+        
+        this.letra = letra.toUpperCase();
         this.valor_diaria = valor_diaria;
     }
 
+    /**
+     * Método para retorno da letra da categoria.
+     * A letra funciona como id da categoria.
+     * 
+     * @return String - letra da categoria
+     */
     public String getLetra() {
         return this.letra;
     }
 
+    /**
+     * Método para retorno do valor da diária dos carros da categoria.
+     * 
+     * @return Double - valor da diária
+     */
     public double getValorDiaria() {
         return this.valor_diaria;
     }
 
+    /**
+     * Método para definir a letra da categoria.
+     * A String da letra é sempre convertida para maiúsculo.
+     * 
+     * @param letra - objeto da classe String.
+     */
     public void setLetra(String letra) {
-        this.letra = letra;
+        this.letra = letra.toUpperCase();
     }
 
+    /**
+     * Método para definir valor da diária da categoria.
+     * 
+     * @param valor_diaria - valor do tipo double.
+     */
     public void setValorDiaria(double valor_diaria) {
         this.valor_diaria = valor_diaria;
     }
 
+    /**
+     * Método para adicionar carro à categoria.
+     * Caso carro já esteja adicionado, nada é modificado.
+     * 
+     * @param carro - objeto da classe Carro
+     */
     public void adicionarCarro(Carro carro) {
         if(!carros.adiciona(carro))
-                System.out.println("Carro ja esta na categoria!");
+            System.out.println("Carro ja esta na categoria!");
     }
 
+    /**
+     * Método para remover carro da categoria.
+     * Caso carro não esteja na categoria, nada é modificado.
+     * 
+     * @param carro - objeto da classe Carro
+     */
     public void removerCarro(Carro carro) {
-        if(carros.remove(carro.get_id()) != null) 
+        if(carros.remove(carro.getId()) != null) 
             System.out.println("Carro removido com sucesso");
         else
             System.out.println("Carro nao encontrado");
     }
 
-    public Carro acessa_carros() {return (Carro) carros.navega(true);}
+    /**
+     * Método para retorno dos carros da categoria.
+     * 
+     * @return TODO:
+     */
+    public Carro getCarros() {
+        return (Carro) carros.navega(true);
+    }
 
     @Override
-    public String toString() {return "Categoria " + this.letra;}
+    public String toString() {
+        return "Categoria " + this.letra;
+    }
 
-	@Override
-	public int getId() {return id;}
-
-	@Override
-	public void mostraResumo() {System.out.printf("Letra: %s; Valor de diaria: %f", letra,valor_diaria);} 
+    /**
+     * TODO:
+     */
+    @Override
+    public void mostraResumo() {
+        System.out.printf("Letra: %s; Valor de diaria: %f", letra,valor_diaria);
+    } 
     
-	@Override
+    /**
+     * TODO:
+     */
+    @Override
     public void mostraCompleto() {
 		System.out.printf("Letra: %s; Valor de diaria: %f", letra,valor_diaria);
 		System.out.println("CARROS:");

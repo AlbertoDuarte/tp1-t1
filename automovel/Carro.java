@@ -7,7 +7,7 @@ package automovel;
 
 /**
  *
- * @author root
+ * @author AlbertoDuarte
  */
 public class Carro extends ObjetoId{
     private static int countId = 1;
@@ -25,6 +25,7 @@ public class Carro extends ObjetoId{
         super(Carro.countId);
         Carro.countId++;
         
+        this.categoria = null;
         this.placa = placa.toLowerCase();
         this.cor = cor.toLowerCase();
         this.ano = ano;
@@ -35,22 +36,58 @@ public class Carro extends ObjetoId{
         modelo.adicionarCarro((this));
     }
     
-    public Categoria getCategoria() {return this.categoria;}
+    /**
+     * Método para retorno da categoria do carro.
+     * 
+     * @return Categoria - categoria do carro
+     */
+    public Categoria getCategoria() {
+        return this.categoria;
+    }
     
-    public Modelo getModelo() {return this.modelo;}
+    /**
+     *  Método para retorno do modelo do carro.
+     * 
+     * @return Modelo - modelo do carro
+     */
+    public Modelo getModelo() {
+        return this.modelo;
+    }
     
-    public void setCategoria(Categoria categoria) {this.categoria = categoria;}
+    /**
+     *  Método para definir categoria do carro.
+     * 
+     * @param categoria - Objeto da classe Categoria
+     */
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
     
-    public void modificarModelo(Modelo modelo) {this.modelo = modelo;}
+    /**
+     * Método para definir modelo do carro.
+     * 
+     * @param modelo - Objeto da classe Modelo
+     */
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
     
     @Override
     public String toString() { 
-      return "Carro nº " + this.get_id()+ ", Placa: " + this.placa + ", Modelo " + this.modelo.getNome() + ", Marca: " + this.modelo.getMarca().getNome() + "";
+      return "Carro n. " + this.getId()+ ", Placa " + this.placa + ", Cor " + this.cor + ", Modelo " + this.modelo.getNome() + ", Marca " + this.modelo.getMarca().getNome() + "";
     }
 
+    /**
+     * TODO:
+     */
     @Override
-    public void mostraResumo() {System.out.printf("%s", this.toString());}
+    public void mostraResumo() {
+        System.out.printf("%s", this.toString());
+    }
 	
+    /**
+     * TODO:
+     */
     @Override
     public void mostraCompleto() {
 	System.out.println("RENAVAM: " + this.RENAVAM);
@@ -61,10 +98,5 @@ public class Carro extends ObjetoId{
 	System.out.printf("MARCA: "); 
 	System.out.printf("MODELO: "); modelo.mostraResumo();
 	System.out.printf("CATEGORIA: "); categoria.mostraResumo();
-    }
-
-    @Override
-    public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

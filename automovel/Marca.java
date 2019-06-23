@@ -8,7 +8,7 @@ import colecoes.Colecao;
 
 /**
  *
- * @author root
+ * @author AlbertoDuarte
  */
 public class Marca extends ObjetoId {
     private static int countId = 1;
@@ -20,45 +20,74 @@ public class Marca extends ObjetoId {
         super(Marca.countId);
         Marca.countId++;
         
+        this.modelos = new Colecao(10);
         this.nome = nome.toLowerCase();
+        
     }
     
+    /**
+     * Método para retorno do nome da marca.
+     * 
+     * @return String - nome da marca.
+     */
     public String getNome() {
         return this.nome;
     }
 
+    /**
+     * Método para adicionar modelo na marca.
+     * Caso já esteja adicionado, não modifica nada.
+     * 
+     * @param modelo - objeto da classe Modelo.
+     */
     public void adicionarModelo(Modelo modelo) {
         if(!modelos.adiciona(modelo)) {
             System.out.println("Modelo ja esta na marca!");
             return;
         }
-        modelo.modificarMarca(this);
+        modelo.setMarca(this);
     }
     
+    /**
+     * Método para remover modelo da marca.
+     * Caso não esteja na marca, não modifica nada.
+     * 
+     * @param modelo - objeto da classe Modelo.
+     */
     public void removerModelo(Modelo modelo) {
-        if(modelos.remove(modelo.get_id())!=null)
+        if(modelos.remove(modelo.getId())!=null)
             System.out.println("Modelo removido com sucesso");
         else
             System.out.println("Modelo nao encontrado");
     }
     
-    public Modelo acessa_Modelos() {
+    /**
+     * TODO:
+     * 
+     * @return
+     */
+    public Modelo getModelos() {
         return (Modelo) modelos.navega(true);
     }
 
     @Override
     public String toString() { 
-    	return "Marca id " + this.get_id() + ", Nome: " + this.getNome() + "";
+    	return "Marca id " + this.getId() + ", Nome: " + this.getNome() + "";
     }
 
+    /**
+     * TODO:
+     */
     @Override
-    public void mostraResumo() {System.out.printf("Nome: %s", getNome());}
-
-    @Override
-    public void mostraCompleto() { mostraResumo(); System.out.println();} 
-
-    @Override
-    public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mostraResumo() {
+        System.out.printf("Nome: %s", getNome());
     }
+
+    /**
+     * TODO:
+     */
+    @Override
+    public void mostraCompleto() {
+        mostraResumo(); System.out.println();
+    } 
 }
