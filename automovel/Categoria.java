@@ -7,23 +7,19 @@ package automovel;
 
 import colecoes.Colecao;
 import colecoes.Colecionavel;
+import java.util.List;
 
 /**
  *
  * @author AlbertoDuarte
  */
-public class Categoria extends ObjetoId{
-    private static int countId = 1;
-	
+public class Categoria extends ObjetoId{	
     private String letra;
     private double valor_diaria;
-    private Colecao carros;
+    private List<Carro> carros;
 
 
-    Categoria(String letra, double valor_diaria) {
-        super(Categoria.countId);
-    	countId++;
-        
+    public Categoria(String letra, double valor_diaria) {
         this.letra = letra.toUpperCase();
         this.valor_diaria = valor_diaria;
     }
@@ -73,8 +69,7 @@ public class Categoria extends ObjetoId{
      * @param carro - objeto da classe Carro
      */
     public void adicionarCarro(Carro carro) {
-        if(!carros.adiciona(carro))
-            System.out.println("Carro ja esta na categoria!");
+        carros.add(carro);
     }
 
     /**
@@ -95,8 +90,8 @@ public class Categoria extends ObjetoId{
      * 
      * @return TODO:
      */
-    public Carro getCarros() {
-        return (Carro) carros.navega(true);
+    public List<Carro> getCarros() {
+        return carros;
     }
 
     @Override
@@ -119,6 +114,6 @@ public class Categoria extends ObjetoId{
     public void mostraCompleto() {
 		System.out.printf("Letra: %s; Valor de diaria: %f", letra,valor_diaria);
 		System.out.println("CARROS:");
-		carros.mostra();
+		//carros.mostra();
     }
 }

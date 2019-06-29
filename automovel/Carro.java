@@ -9,31 +9,23 @@ package automovel;
  *
  * @author AlbertoDuarte
  */
-public class Carro extends ObjetoId{
-    private static int countId = 1;
-    
+public class Carro extends ObjetoId{    
     private Categoria categoria;
     private Modelo modelo;
     
     private String placa;
     private String cor;
+    private String RENAVAM;
     private int ano;
-    private int RENAVAM;
-    private int quilometragem;
+    private double quilometragem;
     
-    Carro(Modelo modelo, String placa, String cor, int ano, int RENAVAM, int quilometragem) {
-        super(Carro.countId);
-        Carro.countId++;
-        
+    public Carro(String placa, String RENAVAM, String cor, int ano, double quilometragem) {
         this.categoria = null;
         this.placa = placa.toLowerCase();
         this.cor = cor.toLowerCase();
         this.ano = ano;
         this.RENAVAM = RENAVAM;
         this.quilometragem = quilometragem;
-
-        this.modelo = modelo;
-        modelo.adicionarCarro((this));
     }
     
     /**
@@ -52,6 +44,26 @@ public class Carro extends ObjetoId{
      */
     public Modelo getModelo() {
         return this.modelo;
+    }
+    
+    public String getPlaca() {
+        return this.placa;
+    }
+    
+    public String getRenavam() {
+        return this.RENAVAM;
+    }
+    
+    public String getCor() {
+        return this.cor;
+    }
+    
+    public int getAno() {
+        return this.ano;
+    }
+    
+    public double getQuilometragem() {
+        return this.quilometragem;
     }
     
     /**

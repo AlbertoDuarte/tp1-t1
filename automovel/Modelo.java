@@ -6,31 +6,27 @@
 package automovel;
 
 import colecoes.Colecao;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author AlbertoDUarte
  */
 public class Modelo extends ObjetoId {
-    private static int countId = 1;
-    private Colecao carros;
-    
     private Marca marca;
     private String nome;
     private String combustivel;
     private int n_portas;
     
-    Modelo(Marca marca, String nome, String combustivel, int n_portas) {
-        super(Modelo.countId);
-        Modelo.countId++;
-        
+    private ArrayList<Carro> carros;
+    
+    public Modelo(String nome, String combustivel, int n_portas) {
         this.nome = nome.toLowerCase();
         this.combustivel = combustivel.toLowerCase();
         this.n_portas = n_portas;        
         
-        this.carros = new Colecao(10);
-        this.marca = marca;
-        marca.adicionarModelo((this));
+        this.carros = new ArrayList<>();
     }
     
     /**
@@ -67,11 +63,7 @@ public class Modelo extends ObjetoId {
      * @param carro - Objeto da classe Carro.
      */
     public void adicionarCarro(Carro carro) {
-        if(carros.adiciona(carro)) {
-            System.out.println("Carro ja esta no modelo!");
-            return;
-        }
-        carro.setModelo(this);
+        carros.add(carro);
     }
     
     /**
@@ -92,8 +84,8 @@ public class Modelo extends ObjetoId {
      * 
      * @return
      */
-    public Carro getCarros() {
-        return (Carro)carros.navega(true);
+    public List<Carro> getCarros() {
+        return carros;
     }
 
     @Override

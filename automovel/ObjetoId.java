@@ -13,10 +13,6 @@ import colecoes.Colecionavel;
  */
 public abstract class ObjetoId implements Colecionavel{
     private int id;
-    
-    ObjetoId(int id) {
-        this.id = id;
-    }
 
     /**
      * TODO:
@@ -26,5 +22,9 @@ public abstract class ObjetoId implements Colecionavel{
     @Override
     public int getId() {
         return this.id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
 }

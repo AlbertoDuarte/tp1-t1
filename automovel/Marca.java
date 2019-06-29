@@ -5,24 +5,21 @@
  */
 package automovel;
 import colecoes.Colecao;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author AlbertoDuarte
  */
 public class Marca extends ObjetoId {
-    private static int countId = 1;
-    private Colecao modelos;
+    private List<Modelo> modelos;
     
     private String nome;
 
-    Marca(String nome) {
-        super(Marca.countId);
-        Marca.countId++;
-        
-        this.modelos = new Colecao(10);
+    public Marca(String nome) {
+        this.modelos = new ArrayList<>();
         this.nome = nome.toLowerCase();
-        
     }
     
     /**
@@ -41,11 +38,7 @@ public class Marca extends ObjetoId {
      * @param modelo - objeto da classe Modelo.
      */
     public void adicionarModelo(Modelo modelo) {
-        if(!modelos.adiciona(modelo)) {
-            System.out.println("Modelo ja esta na marca!");
-            return;
-        }
-        modelo.setMarca(this);
+        modelos.add(modelo);
     }
     
     /**
@@ -66,8 +59,8 @@ public class Marca extends ObjetoId {
      * 
      * @return
      */
-    public Modelo getModelos() {
-        return (Modelo) modelos.navega(true);
+    public List<Modelo> getModelos() {
+        return modelos;
     }
 
     @Override
