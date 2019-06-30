@@ -97,6 +97,14 @@ public class Carro extends ObjetoId{
         this.agencia = agencia;
     }
     
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+    
+    public void setQuilometragem(double quilometragem) {
+        this.quilometragem = quilometragem;
+    }
+    
     @Override
     public String toString() { 
       return "Carro n. " + this.getId()+ ", Placa " + this.placa + ", Cor " + this.cor + ", Modelo " + this.modelo.getNome() + ", Marca " + this.modelo.getMarca().getNome() + "";

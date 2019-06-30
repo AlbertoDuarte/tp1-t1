@@ -54,6 +54,10 @@ public class Modelo extends ObjetoId {
     public int getNPortas() {
         return this.n_portas;
     }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     /**
      * Método para definir marca do modelo.
@@ -62,6 +66,14 @@ public class Modelo extends ObjetoId {
      */
     public void setMarca(Marca marca) {
         this.marca = marca;
+    }
+    
+    public void setCombustivel(String combustivel) {
+        this.combustivel = combustivel;
+    }
+    
+    public void setNPortas(int n_portas) {
+        this.n_portas = n_portas;
     }
     
     /**
