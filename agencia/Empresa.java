@@ -2,7 +2,6 @@ package agencia;
 
 import colecoes.Colecao;
 import cliente.Cliente;
-import agencia.Agencia;
 import automovel.Categoria;
 import automovel.Marca;
 
@@ -56,7 +55,7 @@ public class Empresa {
                 System.out.println("Esta marca já está adicionada.");
     }
     public void remove(Marca marca){
-        if(marcas.remove(marca.get_id())!=null)
+        if(marcas.remove(marca.getId())!=null)
             System.out.println("Marca removida com sucesso.");
         else
             System.out.println("Marca não encontrada.");

@@ -4,53 +4,51 @@ import fluxos.Fluxo;
 import colecoes.Colecao;
 import colecoes.Colecionavel;
 import automovel.Carro;
+import automovel.ObjetoId;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Agencia implements Colecionavel{
-    private static int countId = 1;
-    private int id;
+public class Agencia extends ObjetoId{
     private String CEP;
-    private Colecao carros;
-    private Colecao fluxos;
+    private List<Carro> carros;
+    private List<Fluxo> fluxos;
     
     
-    Agencia(String CEP){
-        this.id = Agencia.countId;
-        Agencia.countId++;
+    public Agencia(String CEP){
         this.CEP = CEP.toLowerCase();
-        this.carros = new Colecao(5);
-        this.fluxos = new Colecao(5);
+        this.carros = new ArrayList<>();
+        this.fluxos = new ArrayList<>();
     }
     
-    @Override
-    public int getId(){
-        return this.id;
+    public String getCEP() {
+        return this.CEP;
     }
+    
     public void mostraResumo() {System.out.printf("CEP: %s",CEP);}
     
-    public void mostraCompleto(){
-        System.out.println("Id: " + id);
+    public void mostraCompleto() {
+        System.out.println("Id: " + this.getId());
         System.out.println("CEP: " + CEP);
         System.out.println("Carros nesta agência: ");
-        carros.mostra();
+        //carros.mostra();
     }
     
-    public void adicionarCarro(Carro carro){
-    	if(!carros.adiciona(carro))
-    		System.out.println("Carro ja esta adicionado na agencia!");         
+    public void adicionarCarro(Carro carro) {
+    	carros.add(carro);       
     }
     
-    public void removerCarro(Carro carro){        
-        if(this.carros.remove(carro.get_id()) != null)
+    public void removerCarro(Carro carro) {        
+        if(this.carros.remove(carro.getId()) != null)
             System.out.println("Carro removido com sucesso");
         else
             System.out.println("Carro não encontrado");
     }
     
-    public void adicionaFluxo(Fluxo fluxo){
-        fluxos.adiciona((Colecionavel) fluxo);
+    public void adicionaFluxo(Fluxo fluxo) {
+        fluxos.add(fluxo);
     }
     
-    public void mostraHistorico(){
-        fluxos.navega(false);
-    }
+//    public void mostraHistorico(){
+//        fluxos.navega(false);
+//    }
 }

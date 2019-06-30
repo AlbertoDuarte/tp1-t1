@@ -38,7 +38,7 @@ public class Marca extends ObjetoId {
      * @param modelo - objeto da classe Modelo.
      */
     public void adicionarModelo(Modelo modelo) {
-        modelos.add(modelo);
+        this.modelos.add(modelo);
     }
     
     /**
@@ -48,7 +48,7 @@ public class Marca extends ObjetoId {
      * @param modelo - objeto da classe Modelo.
      */
     public void removerModelo(Modelo modelo) {
-        if(modelos.remove(modelo.getId())!=null)
+        if(this.modelos.remove(modelo.getId())!=null)
             System.out.println("Modelo removido com sucesso");
         else
             System.out.println("Modelo nao encontrado");
@@ -60,7 +60,7 @@ public class Marca extends ObjetoId {
      * @return
      */
     public List<Modelo> getModelos() {
-        return modelos;
+        return this.modelos;
     }
 
     @Override

@@ -69,7 +69,7 @@ public class Categoria extends ObjetoId{
      * @param carro - objeto da classe Carro
      */
     public void adicionarCarro(Carro carro) {
-        carros.add(carro);
+        this.carros.add(carro);
     }
 
     /**
@@ -79,7 +79,7 @@ public class Categoria extends ObjetoId{
      * @param carro - objeto da classe Carro
      */
     public void removerCarro(Carro carro) {
-        if(carros.remove(carro.getId()) != null) 
+        if(this.carros.remove(carro.getId()) != null) 
             System.out.println("Carro removido com sucesso");
         else
             System.out.println("Carro nao encontrado");
@@ -91,7 +91,7 @@ public class Categoria extends ObjetoId{
      * @return TODO:
      */
     public List<Carro> getCarros() {
-        return carros;
+        return this.carros;
     }
 
     @Override

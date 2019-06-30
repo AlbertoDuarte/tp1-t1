@@ -5,6 +5,8 @@
  */
 package automovel;
 
+import agencia.Agencia;
+
 /**
  *
  * @author AlbertoDuarte
@@ -12,6 +14,7 @@ package automovel;
 public class Carro extends ObjetoId{    
     private Categoria categoria;
     private Modelo modelo;
+    private Agencia agencia;
     
     private String placa;
     private String cor;
@@ -21,6 +24,8 @@ public class Carro extends ObjetoId{
     
     public Carro(String placa, String RENAVAM, String cor, int ano, double quilometragem) {
         this.categoria = null;
+        this.agencia = null;
+        
         this.placa = placa.toLowerCase();
         this.cor = cor.toLowerCase();
         this.ano = ano;
@@ -44,6 +49,10 @@ public class Carro extends ObjetoId{
      */
     public Modelo getModelo() {
         return this.modelo;
+    }
+    
+    public Agencia getAgencia() {
+        return this.agencia;
     }
     
     public String getPlaca() {
@@ -82,6 +91,10 @@ public class Carro extends ObjetoId{
      */
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
+    }
+    
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
     }
     
     @Override

@@ -46,6 +46,14 @@ public class Modelo extends ObjetoId {
     public Marca getMarca() {
        return this.marca; 
     }
+    
+    public String getCombustivel() {
+        return this.combustivel;
+    }
+    
+    public int getNPortas() {
+        return this.n_portas;
+    }
 
     /**
      * Método para definir marca do modelo.
@@ -63,7 +71,7 @@ public class Modelo extends ObjetoId {
      * @param carro - Objeto da classe Carro.
      */
     public void adicionarCarro(Carro carro) {
-        carros.add(carro);
+        this.carros.add(carro);
     }
     
     /**
@@ -73,7 +81,7 @@ public class Modelo extends ObjetoId {
      * @param carro - Objeto da classe Carro.
      */
     public void removerCarro(Carro carro) {
-        if(carros.remove(carro.getId())!=null)
+        if(this.carros.remove(carro.getId())!=null)
             System.out.println("Carro removido com sucesso");
         else
             System.out.println("Carro nao encontrado");
@@ -85,7 +93,7 @@ public class Modelo extends ObjetoId {
      * @return
      */
     public List<Carro> getCarros() {
-        return carros;
+        return this.carros;
     }
 
     @Override
