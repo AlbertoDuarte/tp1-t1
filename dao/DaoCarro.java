@@ -19,6 +19,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -139,8 +141,35 @@ public class DaoCarro extends ObjetoBD implements Dao<Carro> {
     }
      
     @Override
-    public void atualizar(Carro carro, String[] params) {
-        this.carros.add(carro);
+    public void atualizar(Carro carro) {
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "UPDATE Carros SET placa=?, renavam=?, cor=?, ano=?, quilometragem=?, id_modelo=?, id_categoria=?, id_agencia=? WHERE id_modelo=?";
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, carro.getPlaca());
+            statement.setString(2, carro.getRenavam());
+            statement.setString(3, carro.getCor());
+            statement.setInt(4, carro.getAno());
+            statement.setDouble(5, carro.getQuilometragem());
+            statement.setInt(6, carro.getModelo().getId());
+            statement.setInt(7, carro.getCategoria().getId());
+            statement.setInt(8, carro.getAgencia().getId());
+            statement.setInt(9, carro.getId());
+            statement.executeUpdate();
+                    
+            super.fecharBD(conn);
+            
+            for(int i = 0; i < this.carros.size(); i++) {
+                if(this.carros.get(i).getId() == carro.getId()) {
+                    this.carros.set(i, carro);
+                    break;
+                }
+            }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
      
     @Override

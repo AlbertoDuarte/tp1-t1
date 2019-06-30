@@ -18,6 +18,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -84,8 +86,28 @@ public class DaoAgencia extends ObjetoBD implements Dao<Agencia> {
     }
      
     @Override
-    public void atualizar(Agencia agencia, String[] params) {
-        this.agencias.add(agencia);
+    public void atualizar(Agencia agencia) {
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "UPDATE Agencias SET cep=? WHERE id_agencia=?";
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, agencia.getCEP());
+            statement.setInt(2, agencia.getId());
+            statement.executeUpdate();
+                    
+            super.fecharBD(conn);
+            
+            for(int i = 0; i < this.agencias.size(); i++) {
+                if(this.agencias.get(i).getId() == agencia.getId()) {
+                    this.agencias.set(i, agencia);
+                    break;
+                }
+            }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
      
     @Override

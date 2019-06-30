@@ -5,6 +5,7 @@
  */
 package dao;
 
+import automovel.Categoria;
 import automovel.Marca;
 import automovel.Modelo;
 import java.sql.Connection;
@@ -16,6 +17,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -83,8 +86,28 @@ public class DaoMarca extends ObjetoBD implements Dao<Marca> {
     }
      
     @Override
-    public void atualizar(Marca marca, String[] params) {
-        this.marcas.add(marca);
+    public void atualizar(Marca marca) {
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "UPDATE Marcas SET nome=? WHERE id_marca=?";
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, marca.getNome());
+            statement.setInt(2, marca.getId());
+            statement.executeUpdate();
+                    
+            super.fecharBD(conn);
+            
+            for(int i = 0; i < this.marcas.size(); i++) {
+                if(this.marcas.get(i).getId() == marca.getId()) {
+                    this.marcas.set(i, marca);
+                    break;
+                }
+            }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
      
     @Override

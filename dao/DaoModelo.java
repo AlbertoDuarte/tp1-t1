@@ -17,6 +17,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -103,8 +105,31 @@ public class DaoModelo extends ObjetoBD implements Dao<Modelo> {
     }
      
     @Override
-    public void atualizar(Modelo modelo, String[] params) {
-        this.modelos.add(modelo);
+    public void atualizar(Modelo modelo) {
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "UPDATE Modelos SET nome=?, combustivel=?, n_portas=?, id_marca=? WHERE id_modelo=?";
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, modelo.getNome());
+            statement.setString(2, modelo.getCombustivel());
+            statement.setInt(3, modelo.getNPortas());
+            statement.setInt(4, modelo.getMarca().getId());
+            statement.setInt(5, modelo.getId());
+            statement.executeUpdate();
+                    
+            super.fecharBD(conn);
+            
+            for(int i = 0; i < this.modelos.size(); i++) {
+                if(this.modelos.get(i).getId() == modelo.getId()) {
+                    this.modelos.set(i, modelo);
+                    break;
+                }
+            }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
      
     @Override
