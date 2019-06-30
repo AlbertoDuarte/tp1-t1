@@ -126,12 +126,7 @@ public class DaoCarro extends ObjetoBD implements Dao<Carro> {
             statement.setInt(8, carro.getModelo().getId());
             statement.executeUpdate();
             
-            sql = "SELECT LAST_INSERT_ID();";
-            Statement statement2 = conn.createStatement();
-            ResultSet result = statement2.executeQuery(sql);
-            
-            result.next();
-            int id = result.getInt("LAST_INSERT_ID()");
+            int id = super.getLastInsertId(conn);
             carro.setId(id);
             
             super.fecharBD(conn);

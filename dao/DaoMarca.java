@@ -69,12 +69,7 @@ public class DaoMarca extends ObjetoBD implements Dao<Marca> {
             statement.setString(1, marca.getNome());
             statement.executeUpdate();
             
-            sql = "SELECT LAST_INSERT_ID();";
-            Statement statement2 = conn.createStatement();
-            ResultSet result = statement2.executeQuery(sql);
-            
-            result.next();
-            int id = result.getInt("LAST_INSERT_ID()");
+            int id = super.getLastInsertId(conn);
             marca.setId(id);
             
             super.fecharBD(conn);

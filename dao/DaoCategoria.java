@@ -72,12 +72,7 @@ public class DaoCategoria extends ObjetoBD implements Dao<Categoria> {
             statement.setString(2, Double.toString(categoria.getValorDiaria()));
             statement.executeUpdate();
             
-            sql = "SELECT LAST_INSERT_ID();";
-            Statement statement2 = conn.createStatement();
-            ResultSet result = statement2.executeQuery(sql);
-            
-            result.next();
-            int id = result.getInt("LAST_INSERT_ID()");
+            int id = super.getLastInsertId(conn);
             categoria.setId(id);
             
             super.fecharBD(conn);

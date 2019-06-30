@@ -7,7 +7,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,5 +39,16 @@ public class ObjetoBD {
         } catch (SQLException ex) {
             Logger.getLogger(ObjetoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int getLastInsertId(Connection conn) throws SQLException {
+            String sql = "SELECT LAST_INSERT_ID();";
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            
+            result.next();
+            int id = result.getInt("LAST_INSERT_ID()");
+            
+            return id;
     }
 }

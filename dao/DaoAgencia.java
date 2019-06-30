@@ -69,12 +69,8 @@ public class DaoAgencia extends ObjetoBD implements Dao<Agencia> {
             statement.setString(1, agencia.getCEP());
             statement.executeUpdate();
             
-            sql = "SELECT LAST_INSERT_ID();";
-            Statement statement2 = conn.createStatement();
-            ResultSet result = statement2.executeQuery(sql);
-            
-            result.next();
-            int id = result.getInt("LAST_INSERT_ID()");
+            int id = super.getLastInsertId(conn);
+
             agencia.setId(id);
             
             super.fecharBD(conn);
