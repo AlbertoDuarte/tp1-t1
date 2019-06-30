@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Marca extends ObjetoId {
     private List<Modelo> modelos;
-    
     private String nome;
 
     public Marca(String nome) {

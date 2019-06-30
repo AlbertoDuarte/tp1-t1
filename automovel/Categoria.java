@@ -7,6 +7,7 @@ package automovel;
 
 import colecoes.Colecao;
 import colecoes.Colecionavel;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,12 +15,12 @@ import java.util.List;
  * @author AlbertoDuarte
  */
 public class Categoria extends ObjetoId{	
+    private List<Carro> carros;
     private String letra;
     private double valor_diaria;
-    private List<Carro> carros;
-
 
     public Categoria(String letra, double valor_diaria) {
+        this.carros = new ArrayList<>();
         this.letra = letra.toUpperCase();
         this.valor_diaria = valor_diaria;
     }

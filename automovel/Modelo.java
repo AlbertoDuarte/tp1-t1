@@ -14,19 +14,19 @@ import java.util.List;
  * @author AlbertoDUarte
  */
 public class Modelo extends ObjetoId {
+    private ArrayList<Carro> carros;
     private Marca marca;
     private String nome;
     private String combustivel;
     private int n_portas;
     
-    private ArrayList<Carro> carros;
+
     
     public Modelo(String nome, String combustivel, int n_portas) {
+        this.carros = new ArrayList<>();
         this.nome = nome.toLowerCase();
         this.combustivel = combustivel.toLowerCase();
         this.n_portas = n_portas;        
-        
-        this.carros = new ArrayList<>();
     }
     
     /**

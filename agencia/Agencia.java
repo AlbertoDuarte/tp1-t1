@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Agencia extends ObjetoId{
-    private String CEP;
     private List<Carro> carros;
     private List<Fluxo> fluxos;
+    private String CEP;
     
     
     public Agencia(String CEP){
-        this.CEP = CEP.toLowerCase();
         this.carros = new ArrayList<>();
         this.fluxos = new ArrayList<>();
+        this.CEP = CEP.toLowerCase();
     }
     
     public String getCEP() {
