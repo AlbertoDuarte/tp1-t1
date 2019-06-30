@@ -24,7 +24,7 @@ import java.util.Optional;
 public class DaoMarca extends ObjetoBD implements Dao<Marca> {
     private List<Marca> marcas;
      
-    public DaoMarca(List<Modelo> modelos) throws SQLException {
+    public DaoMarca() throws SQLException {
         Connection conn = super.conectarBD();
         this.marcas = new ArrayList<>();
 
@@ -38,15 +38,10 @@ public class DaoMarca extends ObjetoBD implements Dao<Marca> {
             
             Marca marca = new Marca(nome);
             marca.setId(id);
-            marcas.add(marca);
+            this.marcas.add(marca);
         }
         
-        // coloca modelos em suas respectivas marcas
-        marcas.stream().forEach((marca) -> {
-            modelos.stream().filter((modelo) -> (modelo.getMarca().getId() == marca.getId())).forEach((modelo) -> {
-                marca.adicionarModelo(modelo);
-            });
-        });
+        super.fecharBD(conn);
     }
      
     @Override
@@ -61,7 +56,7 @@ public class DaoMarca extends ObjetoBD implements Dao<Marca> {
      
     @Override
     public List<Marca> getTodos() {
-        return marcas;
+        return this.marcas;
     }
      
     @Override
@@ -74,11 +69,12 @@ public class DaoMarca extends ObjetoBD implements Dao<Marca> {
             statement.setString(1, marca.getNome());
             statement.executeUpdate();
             
-            sql = "SELECT_LAST_INSERTED_ID();";
+            sql = "SELECT LAST_INSERT_ID();";
             Statement statement2 = conn.createStatement();
             ResultSet result = statement2.executeQuery(sql);
             
-            int id = result.getInt("SELECT_LAST_INSERTED_ID()");
+            result.next();
+            int id = result.getInt("LAST_INSERT_ID()");
             marca.setId(id);
             
             super.fecharBD(conn);
@@ -88,16 +84,16 @@ public class DaoMarca extends ObjetoBD implements Dao<Marca> {
         }
         
 
-        marcas.add(marca);
+        this.marcas.add(marca);
     }
      
     @Override
     public void atualizar(Marca marca, String[] params) {
-        marcas.add(marca);
+        this.marcas.add(marca);
     }
      
     @Override
     public void deletar(Marca marca) {
-        marcas.remove(marca);
+        this.marcas.remove(marca);
     }
 }

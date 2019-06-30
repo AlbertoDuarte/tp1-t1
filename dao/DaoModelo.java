@@ -25,7 +25,7 @@ import java.util.Optional;
 public class DaoModelo extends ObjetoBD implements Dao<Modelo> {
     private List<Modelo> modelos;
      
-    public DaoModelo(List<Carro> carros) throws SQLException {
+    public DaoModelo(DaoMarca daomarca) throws SQLException {
         Connection conn = super.conectarBD();
         this.modelos = new ArrayList<>();
 
@@ -34,27 +34,36 @@ public class DaoModelo extends ObjetoBD implements Dao<Modelo> {
         ResultSet result = statement.executeQuery(sql);
         
         while(result.next()) {
-            int id = result.getInt("id_marca");
+            int id = result.getInt("id_modelo");
+            int id_marca = result.getInt("id_marca");
             String nome = result.getString("nome");
             String combustivel = result.getString("combustivel");
             int n_portas = result.getInt("n_portas");
             
             Modelo modelo = new Modelo(nome, combustivel, n_portas);
             modelo.setId(id);
-            modelos.add(modelo);
+            this.modelos.add(modelo);
+            
+            // associa modelos com as marcas
+            Optional<Marca> op = daomarca.get(id_marca);
+            
+            try {
+                Marca marca = op.get();
+                marca.adicionarModelo(modelo);
+                modelo.setMarca(marca);
+            } catch(Exception ex) {
+                System.out.println("Associacao marca e modelo no banco de dados, mas nao do DaoMarca");
+                ex.printStackTrace();
+            }
+            
         }
         
-        // coloca carros em seus respectivos modelos
-        modelos.stream().forEach((modelo) -> {
-            carros.stream().filter((carro) -> (carro.getModelo().getId() == modelo.getId())).forEach((carro) -> {
-                modelo.adicionarCarro(carro);
-            });
-        });
+        super.fecharBD(conn);
     }
      
     @Override
     public Optional<Modelo> get(long id) {
-        for(Modelo modelo : modelos){
+        for(Modelo modelo : this.modelos){
             if(modelo.getId() == id) {
                 return Optional.ofNullable(modelo);
             }
@@ -64,24 +73,28 @@ public class DaoModelo extends ObjetoBD implements Dao<Modelo> {
      
     @Override
     public List<Modelo> getTodos() {
-        return modelos;
+        return this.modelos;
     }
      
     @Override
     public void salvar(Modelo modelo) {
         try {
             Connection conn = super.conectarBD();
-            String sql = "INSERT INTO Marcas (nome) VALUES (?)";
+            String sql = "INSERT INTO Modelos (nome, combustivel, n_portas, id_marca) VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, modelo.getNome());
+            statement.setString(2, modelo.getCombustivel());
+            statement.setInt(3, modelo.getNPortas());
+            statement.setInt(4, modelo.getMarca().getId());
             statement.executeUpdate();
             
-            sql = "SELECT_LAST_INSERTED_ID();";
+            sql = "SELECT LAST_INSERT_ID();";
             Statement statement2 = conn.createStatement();
             ResultSet result = statement2.executeQuery(sql);
             
-            int id = result.getInt("SELECT_LAST_INSERTED_ID()");
+            result.next();
+            int id = result.getInt("LAST_INSERT_ID()");
             modelo.setId(id);
             
             super.fecharBD(conn);
@@ -91,16 +104,16 @@ public class DaoModelo extends ObjetoBD implements Dao<Modelo> {
         }
         
 
-        modelos.add(modelo);
+        this.modelos.add(modelo);
     }
      
     @Override
     public void atualizar(Modelo modelo, String[] params) {
-        modelos.add(modelo);
+        this.modelos.add(modelo);
     }
      
     @Override
     public void deletar(Modelo modelo) {
-        modelos.remove(modelo);
+        this.modelos.remove(modelo);
     }
 }

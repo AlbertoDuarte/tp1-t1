@@ -5,6 +5,7 @@
  */
 package dao;
 
+import agencia.Agencia;
 import automovel.Carro;
 import automovel.Categoria;
 import automovel.Marca;
@@ -22,54 +23,50 @@ import java.util.Optional;
  *
  * @author AlbertoNeto
  */
-public class DaoCategoria extends ObjetoBD implements Dao<Categoria> {
-    private List<Categoria> categorias;
+public class DaoAgencia extends ObjetoBD implements Dao<Agencia> {
+    private List<Agencia> agencias;
      
-    public DaoCategoria() throws SQLException {
+    public DaoAgencia() throws SQLException {
         Connection conn = super.conectarBD();
-        this.categorias = new ArrayList<>();
+        this.agencias = new ArrayList<>();
 
-        String sql = "SELECT * FROM Categorias;";
+        String sql = "SELECT * FROM Agencias;";
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(sql);
         
         while(result.next()) {
-            int id = result.getInt("id_categoria");
-            String letra = result.getString("letra");
-            double diaria = result.getDouble("valor_diaria");
+            int id = result.getInt("id_agencia");
+            String cep = result.getString("cep");
             
-            Categoria categoria = new Categoria(letra, diaria);
-            categoria.setId(id);
-            this.categorias.add(categoria);
+            Agencia agencia = new Agencia(cep);
+            agencia.setId(id);
+            this.agencias.add(agencia);
         }
-        
-        super.fecharBD(conn);
     }
      
     @Override
-    public Optional<Categoria> get(long id) {
-        for(Categoria categoria : this.categorias){
-            if(categoria.getId() == id) {
-                return Optional.ofNullable(categoria);
+    public Optional<Agencia> get(long id) {
+        for(Agencia agencia : this.agencias){
+            if(agencia.getId() == id) {
+                return Optional.ofNullable(agencia);
             }
         }
         return Optional.empty();
     }
      
     @Override
-    public List<Categoria> getTodos() {
-        return categorias;
+    public List<Agencia> getTodos() {
+        return this.agencias;
     }
      
     @Override
-    public void salvar(Categoria categoria) {
+    public void salvar(Agencia agencia) {
         try {
             Connection conn = super.conectarBD();
-            String sql = "INSERT INTO Categorias (letra, valor_diaria) VALUES (?, ?)";
+            String sql = "INSERT INTO Agencias (cep) VALUES (?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, categoria.getLetra());
-            statement.setString(2, Double.toString(categoria.getValorDiaria()));
+            statement.setString(1, agencia.getCEP());
             statement.executeUpdate();
             
             sql = "SELECT LAST_INSERT_ID();";
@@ -78,7 +75,7 @@ public class DaoCategoria extends ObjetoBD implements Dao<Categoria> {
             
             result.next();
             int id = result.getInt("LAST_INSERT_ID()");
-            categoria.setId(id);
+            agencia.setId(id);
             
             super.fecharBD(conn);
             
@@ -87,16 +84,16 @@ public class DaoCategoria extends ObjetoBD implements Dao<Categoria> {
         }
         
 
-        this.categorias.add(categoria);
+        this.agencias.add(agencia);
     }
      
     @Override
-    public void atualizar(Categoria categoria, String[] params) {
-        this.categorias.add(categoria);
+    public void atualizar(Agencia agencia, String[] params) {
+        this.agencias.add(agencia);
     }
      
     @Override
-    public void deletar(Categoria categoria) {
-        this.categorias.remove(categoria);
+    public void deletar(Agencia agencia) {
+        this.agencias.remove(agencia);
     }
 }
