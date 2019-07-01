@@ -115,6 +115,22 @@ public class DaoCategoria extends ObjetoBD implements Dao<Categoria> {
      
     @Override
     public void deletar(Categoria categoria) {
-        this.categorias.remove(categoria);
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "DELETE FROM Categorias WHERE id_categoria=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setInt(1, categoria.getId());
+            statement.executeUpdate();
+            
+            super.fecharBD(conn);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        boolean removido = this.categorias.removeIf(o -> (o.getId() == categoria.getId()));
+        
+        if(!removido)
+            System.out.println("categoria nao removido da lista na dao! Erro!");
     }
 }

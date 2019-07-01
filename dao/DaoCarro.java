@@ -168,12 +168,27 @@ public class DaoCarro extends ObjetoBD implements Dao<Carro> {
             }
                 
         } catch (SQLException ex) {
-            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoCarro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      
     @Override
     public void deletar(Carro carro) {
-        this.carros.remove(carro);
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "DELETE FROM Carros WHERE id_carro=?";
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, carro.getId());
+            statement.executeUpdate();
+            
+            super.fecharBD(conn);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoCarro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        boolean removido = this.carros.removeIf(o -> (o.getId() == carro.getId()));
+        if(!removido)
+            System.out.println("carro nao removido da lista na dao! Erro!");
     }
 }

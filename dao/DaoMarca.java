@@ -106,12 +106,28 @@ public class DaoMarca extends ObjetoBD implements Dao<Marca> {
             }
                 
         } catch (SQLException ex) {
-            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoMarca.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      
     @Override
     public void deletar(Marca marca) {
-        this.marcas.remove(marca);
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "DELETE FROM Marcas WHERE id_marca=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setInt(1, marca.getId());
+            statement.executeUpdate();
+            
+            super.fecharBD(conn);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMarca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        boolean removido = this.marcas.removeIf(o -> (o.getId() == marca.getId()));
+        
+        if(!removido)
+            System.out.println("marca nao removido da lista na dao! Erro!");
     }
 }

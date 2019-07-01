@@ -106,12 +106,28 @@ public class DaoAgencia extends ObjetoBD implements Dao<Agencia> {
             }
                 
         } catch (SQLException ex) {
-            Logger.getLogger(DaoCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoAgencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      
     @Override
     public void deletar(Agencia agencia) {
-        this.agencias.remove(agencia);
+        try {
+            Connection conn = super.conectarBD();
+            String sql = "DELETE FROM Agencias WHERE id_agencia=?";
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, agencia.getId());
+            statement.executeUpdate();
+            
+            super.fecharBD(conn);
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoAgencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        boolean removido = this.agencias.removeIf(o -> (o.getId() == agencia.getId()));
+        
+        if(!removido)
+            System.out.println("agencia nao removido da lista na dao! Erro!");
     }
 }
