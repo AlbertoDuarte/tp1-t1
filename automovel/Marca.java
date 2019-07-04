@@ -31,7 +31,7 @@ public class Marca extends ObjetoId {
     }
     
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toLowerCase();
     }
 
     /**

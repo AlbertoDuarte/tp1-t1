@@ -56,7 +56,7 @@ public class Modelo extends ObjetoId {
     }
     
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toLowerCase();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Modelo extends ObjetoId {
     }
     
     public void setCombustivel(String combustivel) {
-        this.combustivel = combustivel;
+        this.combustivel = combustivel.toLowerCase();
     }
     
     public void setNPortas(int n_portas) {

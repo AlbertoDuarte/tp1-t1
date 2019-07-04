@@ -26,10 +26,10 @@ public class Carro extends ObjetoId{
         this.categoria = null;
         this.agencia = null;
         
-        this.placa = placa.toLowerCase();
-        this.cor = cor.toLowerCase();
+        this.placa = placa.toUpperCase();
+        this.cor = cor.toUpperCase();
         this.ano = ano;
-        this.RENAVAM = RENAVAM;
+        this.RENAVAM = RENAVAM.toUpperCase();
         this.quilometragem = quilometragem;
     }
     
@@ -98,7 +98,7 @@ public class Carro extends ObjetoId{
     }
     
     public void setCor(String cor) {
-        this.cor = cor;
+        this.cor = cor.toUpperCase();
     }
     
     public void setQuilometragem(double quilometragem) {
