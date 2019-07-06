@@ -95,6 +95,11 @@ public class Categoria extends ObjetoId{
         return this.carros;
     }
 
+    /**
+     *  Método que converte as informacoes da categoria em String.
+     * 
+     * @return String - informacoes da categoria.
+     */
     @Override
     public String toString() {
         return "Categoria " + this.letra;

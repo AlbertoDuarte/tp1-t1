@@ -47,14 +47,29 @@ public class Modelo extends ObjetoId {
        return this.marca; 
     }
     
+    /**
+     * Método para retorno do tipo de combustivel do modelo.
+     * 
+     * @return String - combustivel do modelo.
+     */
     public String getCombustivel() {
         return this.combustivel;
     }
     
+    /**
+     * Método para retorno da quantidade de portas do modelo.
+     * 
+     * @return int - numero de portas.
+     */
     public int getNPortas() {
         return this.n_portas;
     }
     
+    /**
+     *  Método para definir nome da marca.
+     * 
+     * @param nome - objeto da classe String
+     */
     public void setNome(String nome) {
         this.nome = nome.toLowerCase();
     }
@@ -62,16 +77,26 @@ public class Modelo extends ObjetoId {
     /**
      * Método para definir marca do modelo.
      * 
-     * @param marca - Objeto da classe Marca
+     * @param marca - objeto da classe Marca
      */
     public void setMarca(Marca marca) {
         this.marca = marca;
     }
     
+    /**
+     *  Método para definir tipo de combustivel do modelo.
+     * 
+     * @param combustivel - objeto da classe String
+     */
     public void setCombustivel(String combustivel) {
         this.combustivel = combustivel.toLowerCase();
     }
     
+    /**
+     *  Método para definir nome da marca.
+     * 
+     * @param n_portas - objeto do tipo inteiro
+     */
     public void setNPortas(int n_portas) {
         this.n_portas = n_portas;
     }
@@ -100,14 +125,19 @@ public class Modelo extends ObjetoId {
     }
     
     /**
-     * TODO:
+     * Método para retorno da lista de carros pertencentes a esse modelo.
      * 
-     * @return
+     * @return List - lista de carros
      */
     public List<Carro> getCarros() {
         return this.carros;
     }
 
+    /**
+     *  Método que converte as informacoes do modelo em String.
+     * 
+     * @return String - informacoes do modelo.
+     */
     @Override
     public String toString() { 
       return "Modelo id " + this.getId() + ", Nome: " + this.getNome() + ", Marca: " + this.getMarca().getNome() + "";

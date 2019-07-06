@@ -51,14 +51,29 @@ public class Carro extends ObjetoId{
         return this.modelo;
     }
     
+    /**
+     *  Método para retorno da agencia do carro.
+     * 
+     * @return Agencia - agencia do carro
+     */
     public Agencia getAgencia() {
         return this.agencia;
     }
     
+    /**
+     *  Método para retorno da placa do carro.
+     * 
+     * @return String - placa do carro
+     */
     public String getPlaca() {
         return this.placa;
     }
     
+    /**
+     *  Método para retorno do RENAVAM do carro.
+     * 
+     * @return String - RENAVAM do carro
+     */
     public String getRenavam() {
         return this.RENAVAM;
     }
@@ -66,11 +81,21 @@ public class Carro extends ObjetoId{
     public String getCor() {
         return this.cor;
     }
-    
+ 
+    /**
+     *  Método para retorno do ano do carro.
+     * 
+     * @return int - ano do carro
+     */
     public int getAno() {
         return this.ano;
     }
     
+    /**
+     *  Método para retorno da quilometragem do carro.
+     * 
+     * @return double - quilometragem do carro
+     */
     public double getQuilometragem() {
         return this.quilometragem;
     }
@@ -78,7 +103,7 @@ public class Carro extends ObjetoId{
     /**
      *  Método para definir categoria do carro.
      * 
-     * @param categoria - Objeto da classe Categoria
+     * @param categoria - objeto da classe Categoria
      */
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
@@ -87,24 +112,44 @@ public class Carro extends ObjetoId{
     /**
      * Método para definir modelo do carro.
      * 
-     * @param modelo - Objeto da classe Modelo
+     * @param modelo - objeto da classe Modelo
      */
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
     
+    /**
+     *  Método para definir agencia do carro.
+     * 
+     * @param agencia - objeto da classe Agencia
+     */
     public void setAgencia(Agencia agencia) {
         this.agencia = agencia;
     }
     
+    /**
+     *  Método para definir cor do carro.
+     * 
+     * @param cor - objeto da classe String
+     */
     public void setCor(String cor) {
         this.cor = cor.toUpperCase();
     }
     
+    /**
+     *  Método para definir quilometragem do carro.
+     * 
+     * @param quilometragem - objeto do tipo double
+     */
     public void setQuilometragem(double quilometragem) {
         this.quilometragem = quilometragem;
     }
     
+    /**
+     *  Método que converte as informacoes do carro em String.
+     * 
+     * @return String - informacoes do carro.
+     */
     @Override
     public String toString() { 
       return "Carro n. " + this.getId()+ ", Placa " + this.placa + ", Cor " + this.cor + ", Modelo " + this.modelo.getNome() + ", Marca " + this.modelo.getMarca().getNome() + "";

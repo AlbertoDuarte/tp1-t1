@@ -30,6 +30,11 @@ public class Marca extends ObjetoId {
         return this.nome;
     }
     
+    /**
+     *  Método para definir nome da marca.
+     * 
+     * @param nome - Objeto da classe String
+     */
     public void setNome(String nome) {
         this.nome = nome.toLowerCase();
     }
@@ -58,14 +63,19 @@ public class Marca extends ObjetoId {
     }
     
     /**
-     * TODO:
+     * Método para retorno da lista de modelos pertencentes a essa marca.
      * 
-     * @return
+     * @return List - lista de modelos
      */
     public List<Modelo> getModelos() {
         return this.modelos;
     }
 
+    /**
+     *  Método que converte as informacoes da marca em String.
+     * 
+     * @return String - informacoes da marca.
+     */
     @Override
     public String toString() { 
     	return "Marca id " + this.getId() + ", Nome: " + this.getNome() + "";
